@@ -1,0 +1,257 @@
+@import './cart';
+
+header {
+    width     : 100%;
+    overflow  : hidden;
+    background: #00000333;
+    height    : 60px;
+    position  : fixed;
+    z-index   : 100;
+    top       : 0;
+    @extend %transition;
+
+    &.scroll {
+        background: lighten($accent, 100%);
+        box-shadow: 0 0 8px 4px #00000888;
+    }
+
+    .my-container {
+        display              : grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding              : .5rem 0;
+        align-items          : center;
+
+        @include responsiveMedia(m) {
+            display        : flex;
+            align-items    : center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            width    : 40px;
+            transform: scale(1.28);
+
+            a {
+                outline: none;
+            }
+
+            @include responsiveMedia(m) {
+                width: 50px;
+            }
+
+            img {
+                width : 100%;
+                height: 100%;
+            }
+        }
+
+        .icon {
+            display        : flex;
+            justify-self   : end;
+            justify-content: flex-end;
+            gap            : 1rem;
+
+            #headCart {
+                position: relative;
+
+                .badge {
+                    position        : absolute;
+                    background-color: $secondaryColor;
+                    border-radius   : 50%;
+                    transform       : scale(.6) translate(40%, -50%);
+                }
+            }
+
+            >span {
+                cursor   : pointer;
+                font-size: 1.5rem;
+                color    : $secondaryColor;
+                @extend %transition;
+
+                &#bar {
+                    @include responsiveMedia(m) {
+                        display: none;
+                    }
+                }
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+
+                .fa-times {
+                    font-size: 1.7rem;
+                }
+            }
+        }
+
+        .links {
+            grid-area      : 2/span 2;
+            position       : fixed;
+            background     : $primaryColor;
+            bottom         : 0;
+            left           : 0;
+            height         : 100%;
+            width          : 100%;
+            justify-content: center;
+            transform      : translateX(100%);
+            align-items    : center;
+            flex-direction : column;
+            gap            : 1rem;
+            z-index        : -1;
+            text-align     : center;
+            display        : flex;
+            @extend %transition;
+
+            @include responsiveMedia(m) {
+                flex-direction : row;
+                justify-content: flex-end;
+                position       : static !important;
+                transform      : translateX(0);
+                gap            : 0;
+                position       : static !important;
+                overflow       : hidden;
+                background     : none;
+                z-index        : 0;
+            }
+
+            &.open {
+                display  : flex;
+                transform: translateX(0);
+
+                >.nav-link {
+                    transform: translateX(0);
+                }
+
+                @for $i from 1 through 3 {
+                    :nth-child(#{$i}) {
+                        transition-delay: ($i * 0.1s) + 0.15s;
+                    }
+                }
+            }
+
+
+            .nav-link {
+                text-decoration: none;
+                color          : $secondaryColor;
+                font-size      : 1.5rem;
+                text-transform : uppercase;
+                width          : 100%;
+                display        : block;
+                transform      : translateX(100%);
+                cursor         : pointer;
+                @extend %transition;
+                outline   : none;
+                border    : none;
+                position  : relative;
+                background: transparent;
+
+                &.active {
+                    font-weight: bold;
+                }
+
+                @include responsiveMedia(m) {
+                    font-size  : 1.2rem;
+                    transform  : translateX(0);
+                    font-weight: 600;
+                    width      : auto;
+
+                    &.active {
+                        &::after {
+                            background: $secondaryColor;
+                        }
+                    }
+
+                    &::after {
+                        content   : "";
+                        position  : absolute;
+                        height    : .1rem;
+                        width     : 50%;
+                        background: transparent;
+                        bottom    : .6rem;
+                        transform : translateX(-130%);
+                    }
+                }
+
+
+                &:hover {
+                    font-weight   : bold;
+                    letter-spacing: .3rem;
+                }
+            }
+        }
+    }
+
+    .overlay {
+        @include cart();
+    }
+}
+
+#signUp {
+    color: $primaryColor;
+
+    .modal-dialog {
+        max-height: 90% !important;
+        overflow  : auto;
+        display   : grid;
+
+        .modal-header {
+            .btn-close {
+                box-shadow: none !important;
+            }
+        }
+
+        .modal-body {
+            form {
+                display       : flex;
+                flex-direction: column;
+                gap           : .5rem;
+
+                input {
+                    box-shadow: none;
+                    @extend %transition;
+
+
+                    &:focus {
+                        border: 1px solid $primaryColor;
+
+                        &.is-invalid {
+                            border: 1px solid #dc3545 !important;
+                        }
+                    }
+                }
+
+                button {
+                    background: $primaryColor;
+                    border    : none;
+
+                    &:focus {
+                        box-shadow: none;
+                    }
+                }
+
+                >div:last-child {
+                    display       : flex;
+                    flex-direction: column;
+
+                    p {
+                        align-self: flex-end;
+                        cursor    : pointer;
+                        color     : #7272ff;
+                        font-size : .6rem;
+
+                        @include responsiveMedia(m) {
+                            font-size: 1rem;
+                        }
+
+
+                        &:hover {
+                            span {
+                                color: lighten($color: #7272ff, $amount: 10%);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

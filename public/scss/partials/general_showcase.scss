@@ -1,0 +1,40 @@
+#showcase {
+    height               : 150px;
+    width                : 100%;
+    background-attachment: fixed;
+    background-size      : contain;
+    background-repeat    : no-repeat;
+    background-origin    : content-box;
+    position             : relative;
+    overflow             : hidden;
+
+
+
+    img {
+        width : 100%;
+        height: 100%;
+
+    }
+
+    .text {
+        background: #00000055;
+        height    : 100%;
+        width     : 100%;
+        color     : $accent;
+        position  : absolute;
+        top       : 0;
+
+
+        .my-container {
+            display        : flex;
+            justify-content: center;
+            align-items    : flex-end;
+
+            h5 {
+                text-transform: uppercase;
+                font-weight   : bold;
+                font-size     : 3rem;
+            }
+        }
+    }
+}

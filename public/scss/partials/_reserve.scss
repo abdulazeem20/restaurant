@@ -1,0 +1,73 @@
+.reserve {
+    width          : 100%;
+    display        : flex;
+    align-items    : center;
+    flex-direction : column;
+    padding        : 20px 0;
+    gap            : 10px;
+    justify-content: center;
+    background     : $primaryColor;
+
+    h2 {
+        margin   : 0;
+        color    : $secondaryColor;
+        font-size: 25px;
+
+        span {
+            color     : $accent;
+            font-style: italic;
+        }
+    }
+
+    form {
+        margin-bottom: 0;
+        display      : grid;
+        align-items  : center;
+
+        @media screen and (min-width:700px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media screen and (min-width:900px) {
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        width                   : 90%;
+        margin                  : auto;
+        // border         : 1px solid red;
+        // justify-content   : center;
+        gap                     : 20px;
+        // flex-wrap            : wrap;
+
+        input {
+            width        : 100%;
+            border       : none;
+            border-bottom: 1px solid $secondaryColor;
+            height       : 40px;
+            padding      : 10px;
+            transition   : 1s;
+            color        : $accent;
+            background   : none;
+            font-size    : 1.2rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .btn {
+            background   : $secondaryColor;
+            color        : $accent;
+            align-self   : flex-end;
+            // width     : 120px;
+            transition   : 1s;
+            width        : 100%;
+
+            &:hover {
+                background: none;
+                border    : .2px solid $secondaryColor;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,43 @@
+#specialOffer {
+    margin    : 2rem 0;
+    text-align: center;
+    width     : 100%;
+    padding   : 3rem 0;
+    background: $primaryColor;
+
+    .my-container {
+        @extend %sectionContainer;
+
+        h5 {
+            @extend %sectionHeader;
+            color: $accent;
+        }
+
+        .card-container {
+            width  : 100%;
+            display: grid;
+            gap    : 2rem;
+
+            @include responsiveMedia(m) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @include responsiveMedia(l) {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .card {
+                cursor: pointer;
+                @extend %transition;
+                display   : flex;
+                box-shadow: 0 0 4px 2px #00000666;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+
+            }
+        }
+    }
+
+}

@@ -1,0 +1,12 @@
+@import './partials/autoload';
+@import './partials/indexshowcase';
+@import './partials/specialOffer';
+@import './partials/description';
+@import './partials/reserve';
+
+body {
+    background           : url('/assets/images/description.jpg');
+    background-attachment: fixed;
+    background-size      : cover;
+    background-repeat    : no-repeat;
+}

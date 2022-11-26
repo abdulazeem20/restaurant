@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><%= (typeof title != 'undefined')? title :'Fast Food'%></title>
+        <%- include ('partials/style') %>
+        <link rel="stylesheet" href="assets/css/index.css">
+    </head>
+
+    <body>
+        <section id="showcase">
+            <img src="assets/images/home.jpg" alt="">
+            <div class="showcase-text">
+                <div class="my-container">
+                    <h1>Br@nd Diner</h1>
+                    <h3>A Restaurant to always Remember ....</h3>
+                    <a href="/menu" class="btn btn-primary">Our Menu</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="description">
+            <div class="my-container">
+                <h5>Description</h5>
+                <div class="content">
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero non, unde quia a magnam expedita pariatur reiciendis maiores recusandae? Esse hic facilis odit! Eos repellendus earum autem, dignissimos sed enim.
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero non, unde quia a magnam expedita pariatur reiciendis maiores recusandae? Esse hic facilis odit! Eos repellendus earum autem, dignissimos sed enim.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias reprehenderit harum dolores obcaecati sit accusamus odit magnam sunt deleniti ex. Pariatur nemo fugit mollitia perspiciatis a deserunt doloribus. Repudiandae, ex.
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias reprehenderit harum dolores obcaecati sit accusamus odit magnam sunt deleniti ex. Pariatur nemo fugit mollitia perspiciatis a deserunt doloribus. Repudiandae, ex.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reserve">
+
+            <h2>Reserve A <span>Table</span></h2>
+
+            <form>
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <input type="date">
+                <input type="time" placeholder="Time">
+                <input type="number" placeholder="Number Of Sits">
+                <button type="submit" class="btn btn-sm">Submit</button>
+            </form>
+        </section>
+
+
+        <%- include ('partials/footer') %>
+        <%- include ('partials/script') %>
+        <script src="assets/js/index.js" type="module"></script>
+    </body>
+
+</html>

@@ -1,0 +1,199 @@
+footer {
+    margin-top         : 2px;
+    width              : 100%;
+    // padding         : 5px 0;
+    display            : flex;
+    flex-direction     : column;
+    background-color   : $primaryColor;
+
+    .contents {
+        margin : auto;
+        display: grid;
+        width  : 90%;
+        gap    : 35px;
+
+        @media screen and (min-width:700px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media screen and (min-width:900px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        >div {
+            width: 100%;
+        }
+
+        .brand {
+            display        : flex;
+            flex-direction : column;
+            align-items    : center;
+            justify-content: center;
+
+            @media screen and (min-width:700px) {
+                align-items: flex-start;
+            }
+
+            img {
+                width: 50px;
+            }
+
+            .tagline {
+                color: $secondaryColor;
+            }
+
+            p {
+                color     : $accent;
+                text-align: justify;
+                font-size : 1.2rem;
+            }
+        }
+
+        .working {
+            display        : flex;
+            flex-direction : column;
+            align-items    : center;
+            justify-content: center;
+
+            h3 {
+                color       : $secondaryColor;
+                // font-size: 16px;
+                font-size   : 1.4rem;
+            }
+
+            .hours {
+                table {
+                    // width: 130px;
+
+                    tr {
+
+                        td {
+                            margin   : .5rem;
+                            font-size: 1.2rem;
+                            color    : $accent;
+                        }
+                    }
+                }
+            }
+        }
+
+        .contact {
+            display        : flex;
+            flex-direction : column;
+            align-items    : center;
+            justify-content: center;
+
+            @media screen and (min-width:700px) {
+                grid-column: 1/ span 2;
+            }
+
+            @media screen and (min-width:900px) {
+                grid-column: auto;
+            }
+
+            @media screen and (max-width:515px) and (min-width:320px) {
+                margin: auto;
+
+            }
+
+
+            h3 {
+                font-size : 1.4rem;
+                text-align: center;
+                color     : $secondaryColor;
+            }
+
+            form {
+                display       : flex;
+                flex-direction: column;
+                gap           : 10px;
+                width         : 100%;
+
+                input {
+                    border       : none;
+                    border-bottom: 1px solid $secondaryColor;
+                    height       : 40px;
+                    padding      : 8px;
+                    transition   : 1s;
+                    color        : $accent;
+                    background   : none;
+                    font-size    : 1.5rem;
+
+
+                    @media screen and (min-width:700px) {
+                        width: 100%;
+                    }
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                .btn {
+                    background: $secondaryColor;
+                    color     : $accent;
+                    transition: 1s;
+
+                    &:hover {
+                        background: none;
+                        border    : .2px solid $accent;
+                    }
+                }
+            }
+        }
+    }
+
+    .divider {
+        background      : $accent;
+        width           : 95%;
+        height          : 2px;
+        border-radius   : 50%;
+        margin          : .5rem auto;
+        // margin       : auto;
+    }
+
+    .remains {
+        margin         : auto;
+        width          : 90%;
+        display        : flex;
+        align-items    : center;
+        justify-content: space-between;
+
+        @media screen and (max-width:530px) {
+            display        : flex;
+            justify-content: center;
+            align-items    : center;
+            flex-direction : column-reverse;
+        }
+
+        .copy {
+            padding: 10px 0 0 0;
+
+            p {
+                color    : $accent;
+                opacity  : .4;
+                font-size: 1rem;
+            }
+        }
+
+        .handles {
+            display       : flex;
+            align-items   : center;
+            gap           : 15px;
+            // padding    : 3px;
+            font-size     : 1.3rem;
+
+            .ico {
+                color     : $accent;
+                cursor    : pointer;
+                transition: 1s;
+                opacity   : .7;
+
+                &:hover {
+                    opacity: 1;
+                    color  : $secondaryColor;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+#description {
+    width        : 90%;
+    margin       : 3rem 0;
+    margin       : auto;
+    background   : #00000888;
+    padding      : 3rem .5rem;
+    border-radius: .5rem;
+
+    .my-container {
+        @extend %sectionContainer;
+        width: 100%;
+
+        h5 {
+            @extend %sectionHeader;
+            color: $accent;
+        }
+
+        .content {
+            border-radius : 3rem;
+            display       : flex;
+            flex-direction: column;
+            gap           : 1rem;
+            text-align    : justify;
+            color         : $accent;
+
+            p {
+                margin: 0;
+
+                @include responsiveMedia(m) {
+                    font-size: 1.2rem;
+                }
+
+                @include responsiveMedia(l) {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+
+}

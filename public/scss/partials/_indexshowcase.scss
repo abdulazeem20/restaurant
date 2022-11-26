@@ -1,0 +1,74 @@
+#showcase {
+    width        : 100%;
+    height       : 400px;
+    margin-bottom: 3rem;
+    overflow     : hidden;
+    position     : relative;
+
+    @include responsiveMedia(m) {
+        height: 500px;
+    }
+
+    @include responsiveMedia(l) {
+        height: 600px;
+    }
+
+    img {
+        width    : 100%;
+        height   : 100%;
+        animation: animateShowcaseImage 1.5s linear alternate infinite;
+        position : absolute;
+
+        @keyframes animateShowcaseImage {
+            from {
+                transform: scale(1.2);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+    }
+
+    .showcase-text {
+        position       : absolute;
+        top            : 0;
+        backdrop-filter: brightness(60%);
+        left           : 0;
+        height         : 100%;
+        width          : 100%;
+        color          : $accent;
+        background     : #00000999;
+
+        .my-container {
+            display        : flex;
+            flex-direction : column;
+            justify-content: center;
+            position       : relative;
+            gap            : 1rem;
+            align-items    : center;
+            text-align     : center;
+            text-transform : uppercase;
+
+            .btn {
+                background: none;
+                border    : 1px solid $secondaryColor !important;
+                box-shadow: 0;
+                outline   : none;
+                border    : none;
+                // @extend %transition;
+                padding   : .8rem 2.4rem;
+
+                &:focus {
+                    box-shadow: none;
+                }
+
+                &:hover {
+                    background   : $secondaryColor;
+                    border       : none !important;
+                    // box-shadow: 1.5px 1.5px $primaryColor;
+                }
+            }
+        }
+    }
+}

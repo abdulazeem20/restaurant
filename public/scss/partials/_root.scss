@@ -1,0 +1,108 @@
+::-webkit-scrollbar {
+    width: .3rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background   : $secondaryColor;
+    border-radius: 50px;
+}
+
+%transition {
+    transition: .5s ease-in-out all;
+}
+
+%sectionHeader {
+    text-transform: uppercase;
+    font-size     : 2rem;
+    color         : $secondaryColor;
+    position      : relative;
+
+    &::after {
+        content      : '';
+        position     : absolute;
+        width        : 50%;
+        height       : .2rem;
+        background   : $secondaryColor;
+        border-radius: 50%;
+        bottom       : -.3rem;
+        left         : 0;
+    }
+}
+
+.overlay {
+    width          : 100%;
+    height         : 100%;
+    top            : 0;
+    right          : 0;
+    position       : fixed;
+    background     : #00000088;
+    transform      : scale(0);
+    display        : flex;
+    justify-content: flex-end;
+    cursor         : pointer;
+    z-index        : 1000;
+
+    &.open {
+        transform: scale(1);
+    }
+}
+
+%sectionContainer {
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    gap            : 2rem;
+}
+
+.my-container {
+    width : 90%;
+    margin: auto;
+    height: 100%;
+}
+
+.card {
+    background: $accent;
+
+    .foot,
+    .head {
+        display        : flex;
+        justify-content: space-between;
+        align-items    : center;
+    }
+
+    .remove,
+    .delete {
+        border    : none;
+        outline   : none;
+        background: $primaryColor !important;
+    }
+}
+
+.addAndSub {
+    display        : flex;
+    gap            : .5rem;
+    justify-content: space-between;
+    align-items    : center;
+
+    button {
+        border    : none;
+        outline   : none;
+        background: $primaryColor !important;
+    }
+
+    button:focus {
+        box-shadow: none;
+    }
+}
+
+.addToCart {
+    box-shadow: none;
+    border    : none;
+    background: $primaryColor !important;
+}
+
+button,
+.btn {
+    color: $accent;
+}

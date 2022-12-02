@@ -106,3 +106,38 @@ button,
 .btn {
     color: $accent;
 }
+
+.cart_feedback {
+    position  : fixed;
+    bottom    : .5rem;
+    padding   : .5rem 1rem;
+    right     : .5rem;
+    z-index   : 1000;
+    color     : $accent;
+    animation : animateFeedback 1s ease-in-out;
+    background: $success;
+
+    @keyframes animateFeedback {
+        from {
+            transform: translateX(100%);
+        }
+
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    &.remove {
+        animation: removeFeedback 1s ease-in-out;
+
+        @keyframes removeFeedback {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(100%);
+            }
+        }
+    }
+}

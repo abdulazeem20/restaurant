@@ -1,11 +1,6 @@
-import { header } from './components/header.js'
-import { menuSection } from './components/menuC.js'
+import { header } from "./components/Header.js";
+import { menuSection } from "./components/Menu.js";
 
-$('body').prepend(header('menu'))
+$("body").prepend(header("menu"));
 
-menuSection().insertAfter($('#showcase'))
-
-// $('#back').on('click', function () {
-//     $('#menu-section').remove();
-//     menuSection().insertAfter($('#showcase'))
-// });
+menuSection().insertAfter($("#showcase"));

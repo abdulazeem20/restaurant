@@ -1,99 +1,113 @@
-const path = require('path')
-const Database = require(path.resolve('class', 'Database'))
-const db = new Database()
+const path = require("path");
+const Database = require(path.resolve("class", "Database"));
+const db = new Database();
 module.exports = class Foods {
-  constructor () {}
+  constructor() {}
 
-  async getAllCategories () {
+  async getAllCategories() {
     try {
-      let connection = await db.connect()
-      let [data] = await connection.execute('SELECT * FROM category')
-      return data
+      let connection = await db.connect();
+      let [data] = await connection.execute("SELECT * FROM category");
+      return data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  async getTotalNumberOfFoodsIncart () {
+  async getTotalNumberOfFoodsIncart() {
     try {
-      let connection = await db.connect()
-      let [data] = await connection.execute('SELECT COUNT(*) total FROM cart')
-      return data
+      let connection = await db.connect();
+      let [data] = await connection.execute("SELECT COUNT(*) total FROM cart");
+      return data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  async getFoodsInCart () {
+  async getFoodsInCart() {
     try {
-      let connection = await db.connect()
+      let connection = await db.connect();
       let [data] = await connection.execute(
-        'SELECT * FROM foods_in_cart WHERE in_cart = 1'
-      )
-      return data
+        "SELECT * FROM foods_in_cart WHERE in_cart = 1"
+      );
+      return data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  async addToCart (id) {
+  async addToCart(id) {
     try {
-      let connection = await db.connect()
+      let connection = await db.connect();
       let [data] = await connection.execute(
-        'INSERT INTO cart(food_id) VALUES(?)',
+        "INSERT INTO cart(food_id) VALUES(?)",
         [id]
-      )
-      return { success: true }
+      );
+      return { success: true };
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
-  async deleteFromCart (id) {
+
+  async updateQuantity(id, quantity) {
     try {
-      let connection = await db.connect()
+      let connection = await db.connect();
       let [data] = await connection.execute(
-        'DELETE FROM cart WHERE food_id = ?',
+        "UPDATE cart SET quantity = ? WHERE food_id =?",
+        [quantity, id]
+      );
+      return { success: true };
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteFromCart(id) {
+    try {
+      let connection = await db.connect();
+      let [data] = await connection.execute(
+        "DELETE FROM cart WHERE food_id = ?",
         [id]
-      )
-      return { success: true }
+      );
+      return { success: true };
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  async getAllFoods () {
+  async getAllFoods() {
     try {
-      let connection = await db.connect()
-      let [data] = await connection.execute('SELECT * FROM foods_in_cart')
-      return data
+      let connection = await db.connect();
+      let [data] = await connection.execute("SELECT * FROM foods_in_cart");
+      return data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  async getFoodDetail (id) {
+  async getFoodDetail(id) {
     try {
-      let connection = await db.connect()
+      let connection = await db.connect();
       let [data] = await connection.execute(
-        'SELECT * FROM foods WHERE id = ?',
+        "SELECT * FROM foods WHERE id = ?",
         [id]
-      )
-      return data
+      );
+      return data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  async getSpecificFoods (cat) {
+  async getSpecificFoods(cat) {
     try {
-      let connection = await db.connect()
+      let connection = await db.connect();
       let [data] = await connection.execute(
-        'SELECT * FROM foods_in_cart WHERE category = ?',
+        "SELECT * FROM foods_in_cart WHERE category = ?",
         [cat]
-      )
-      return data
+      );
+      return data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
-}
+};

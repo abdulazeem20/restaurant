@@ -1,5 +1,6 @@
 import { cart } from "./Cart.js";
-import { register } from "./Register.js";
+import { signupButton } from "./Signup.Button.js";
+import { LogoutButton } from "./LogoutButton.js";
 export function header(page) {
   let header = $(`
     <header>
@@ -9,12 +10,11 @@ export function header(page) {
             </div>
             <div class="links">
                 <a  class="nav-link ${
-                  page == "menu" ? "active" : ""
+                  page == "menu" && "active"
                 } " href="/menu">Menus</a>
                 <a class="nav-link ${
-                  page == "about" ? "active" : ""
+                  page == "about" && "active"
                 } " href="/about">About</a>
-                <button  class="nav-link" id="signupToggler" data-bs-toggle="modal" data-bs-target="#signUp">Sign up</button>
             </div>
             <div class="icon">
                 <span id="headCart">
@@ -27,8 +27,11 @@ export function header(page) {
             </div>
         </div>
     </header>`);
-  header.find("#signupToggler").on("click", function () {
-    register();
+
+  $.post("/session", null, null, "json").done((res) => {
+    res.session === false
+      ? header.find(".links").append(signupButton())
+      : header.find(".links").append(LogoutButton());
   });
   $("body").prepend(signUpModal());
   $(document).on("scroll", function () {

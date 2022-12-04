@@ -108,23 +108,35 @@ button,
 }
 
 .cart_feedback {
-    position  : fixed;
-    bottom    : .5rem;
-    padding   : .5rem 1rem;
-    right     : .5rem;
-    z-index   : 1000;
-    color     : $accent;
-    animation : animateFeedback 1s ease-in-out;
-    background: $success;
+    position     : fixed;
+    bottom       : .5rem;
+    padding      : .5rem 1rem;
+    right        : .5rem;
+    z-index      : 1000;
+    color        : $accent;
+    animation    : animateFeedback 1s ease-in-out;
+    background   : $success;
+    border-radius: .5rem;
 
     @keyframes animateFeedback {
         from {
             transform: translateX(100%);
+            opacity  : 0;
+        }
+
+        50% {
+            transform: translateX(-50%);
+            opacity  : .5;
         }
 
         to {
             transform: translateX(0);
+            opacity  : 1;
         }
+    }
+
+    &.error {
+        background: $error !important;
     }
 
     &.remove {
@@ -132,11 +144,13 @@ button,
 
         @keyframes removeFeedback {
             from {
-                transform: translateX(0);
+                transform: translateX(-50%);
+                opacity  : .5;
             }
 
             to {
                 transform: translateX(100%);
+                opacity  : 0;
             }
         }
     }

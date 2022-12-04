@@ -14,11 +14,22 @@ export function remove() {
 
 function removeAction(element) {
   let id = element.parents(".card").data("id");
+  let innerHtml = element.html();
   element
     .attr("disabled", "true")
     .html(`<span class="spinner-border text-white spinner-border-sm"></span>`);
   $.post(`/delete_from_cart/${id}`, null, null, "json")
     .done((res) => {
+      if (res.error) {
+        element.attr("disabled", false).html(innerHtml);
+        $("body").prepend(
+          cartFeedback({
+            message: res.error,
+            className: "error",
+          })
+        );
+        return;
+      }
       let inCart = $("#cart .body").find($(".card"));
       $(inCart).each((i, el) => {
         if ($(el).data("id") === id) {

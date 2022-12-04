@@ -1,5 +1,7 @@
 import { login } from "./Login.js";
 import { invalidFeedback } from "./Feedback.js";
+import { LogoutButton } from "./LogoutButton.js";
+
 export function register() {
   let form = $(`
         <form method="post" id="registerForm">
@@ -66,9 +68,10 @@ export function register() {
             target.addClass("is-invalid");
             invalidFeedback(el.msg).insertAfter(target);
           });
-          return;
+        } else if (res.success) {
+          $("header").find("#signupToggler").replaceWith(LogoutButton);
+          $(".modal#signUp").modal("hide");
         }
-        console.log(res);
       })
       .fail((res) => {
         console.log(res.responseText);

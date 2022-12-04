@@ -10,6 +10,7 @@ export function deleteFromCart() {
     let me = $(this);
     let price = $(this).parents(".card").data("cost");
     let quantity = me.parents(".card").find(".quantity").text();
+    let innerHtml = me.html();
     me.attr("disabled", "true").html(
       `<span class="spinner-border text-white spinner-border-sm"></span>`
     );
@@ -18,6 +19,16 @@ export function deleteFromCart() {
     page = typeof page === "undefined" ? "Home" : page;
     $.post(`/delete_from_cart/${id}`, null, null, "json")
       .done((res) => {
+        if (res.error) {
+          me.attr("disabled", false).html(innerHtml);
+          $("body").prepend(
+            cartFeedback({
+              message: res.error,
+              className: "error",
+            })
+          );
+          return;
+        }
         let inCart =
           page == "Menus"
             ? $("#menu-section").find($(".card"))

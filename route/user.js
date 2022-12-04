@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 const { validationResult } = require("express-validator");
 const { userLoginValidation } = require("../class/validator");
+const { userSession } = require(path.resolve("middleware", "userSession"));
 const { userRegistrationValidation } = require(path.resolve(
   "class",
   "validator"
@@ -37,11 +38,22 @@ router.post("/foods/:cat", async (req, res) => {
   res.json(await food.getSpecificFoods(req.params.cat));
 });
 
-router.post("/add_to_cart/:id", async (req, res) => {
+router.post("/add_to_cart/:id", userSession, async (req, res) => {
   res.json(await food.addToCart(req.params.id));
 });
 
-router.post("/delete_from_cart/:id", async (req, res) => {
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect("/");
+  });
+});
+
+router.post("/session", (req, res) => {
+  res.json(req.session.email ? { session: true } : { session: false });
+});
+
+router.post("/delete_from_cart/:id", userSession, async (req, res) => {
   res.json(await food.deleteFromCart(req.params.id));
 });
 
@@ -75,8 +87,11 @@ router.post("/register", userRegistrationValidation(), async (req, res) => {
     });
     return;
   }
-  user.saveUser();
-  res.json({ status: "success" });
+  let save = user.saveUser();
+  if (save) {
+    req.session.email = req.body.email;
+    res.json({ success: "success" });
+  }
 });
 
 router.post("/login", userLoginValidation(), async (req, res) => {
@@ -98,6 +113,7 @@ router.post("/login", userLoginValidation(), async (req, res) => {
     res.json(response);
     return;
   }
+  req.session.email = req.body.email;
   res.json({ success: true });
 });
 

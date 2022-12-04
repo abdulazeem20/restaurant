@@ -18,14 +18,18 @@ export function errorAlert(msg) {
   return response;
 }
 
-export function cartFeedback({ message }) {
-  let icon = '<i class="fa fa-check" aria-hidden="true"></i>';
+export function cartFeedback({ message, className }) {
+  let icon = className
+    ? '<i class="fas fa-exclamation-circle" aria-hidden="true"></i>'
+    : '<i class="fa fa-check" aria-hidden="true"></i>';
+
   let feedback = $(`
-    <div class="cart_feedback" >
-      ${icon + " " + message}
+    <div class="cart_feedback ${className ?? ""}" >
+      ${icon + "  " + message}
     </div>
   `);
-  $("body").find(".cart_feedback").addClass("remove");
+
+  $("body").find(".cart_feedback").remove();
 
   setTimeout(() => {
     feedback.addClass("remove");

@@ -69,8 +69,7 @@ export function register() {
             invalidFeedback(el.msg).insertAfter(target);
           });
         } else if (res.success) {
-          $("header").find("#signupToggler").replaceWith(LogoutButton);
-          $(".modal#signUp").modal("hide");
+          location.reload();
         }
       })
       .fail((res) => {

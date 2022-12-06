@@ -30,10 +30,15 @@ export function foodCard(props) {
   if (props.cart == "cart") {
     card.find(".action").append(addAndSubInCart(props.number));
     deleteFromCart().insertAfter(card.find(".name"));
-  } else if (props.in_cart == 1) {
-    card.find(".action").append(remove());
   } else {
-    card.find(".action").append(addToCart());
+    $.post("/in_cart", null, null, "json").done((res) => {
+      let food = res.filter((el) => el.food_id == props.id);
+      if (food.length > 0 && food[0].food_id === props.id) {
+        card.find(".action").append(remove());
+      } else {
+        card.find(".action").append(addToCart());
+      }
+    });
   }
   return card;
 }

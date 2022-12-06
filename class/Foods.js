@@ -14,47 +14,36 @@ module.exports = class Foods {
     }
   }
 
-  async getTotalNumberOfFoodsIncart() {
-    try {
-      let connection = await db.connect();
-      let [data] = await connection.execute("SELECT COUNT(*) total FROM cart");
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async getFoodsInCart() {
+  async getTotalNumberOfFoodsIncart(email) {
     try {
       let connection = await db.connect();
       let [data] = await connection.execute(
-        "SELECT * FROM foods_in_cart WHERE in_cart = 1"
+        "SELECT COUNT(*) total FROM cart WHERE user = ?",
+        [email]
       );
-      return data;
+      return data.length > 0 ? data : [{ total: 0 }];
     } catch (error) {
       console.log(error);
     }
   }
 
-  async addToCart(id) {
+  async getFoodsInCart(email) {
     try {
       let connection = await db.connect();
-      let [data] = await connection.execute(
-        "INSERT INTO cart(food_id) VALUES(?)",
-        [id]
-      );
-      return { success: true };
+      let [data] = await connection.execute("CALL getUsersCart(?)", [email]);
+      console.log(data);
+      return data[0].length > 0 ? data[0] : [{ success: true }];
     } catch (error) {
       console.log(error);
     }
   }
 
-  async updateQuantity(id, quantity) {
+  async addToCart(id, email) {
     try {
       let connection = await db.connect();
       let [data] = await connection.execute(
-        "UPDATE cart SET quantity = ? WHERE food_id =?",
-        [quantity, id]
+        "INSERT INTO cart(food_id,user) VALUES(?,?)",
+        [id, email]
       );
       return { success: true };
     } catch (error) {
@@ -62,12 +51,25 @@ module.exports = class Foods {
     }
   }
 
-  async deleteFromCart(id) {
+  async updateQuantity(id, quantity, email) {
     try {
       let connection = await db.connect();
       let [data] = await connection.execute(
-        "DELETE FROM cart WHERE food_id = ?",
-        [id]
+        "UPDATE cart SET quantity = ? WHERE food_id =? AND user = ?",
+        [quantity, id, email]
+      );
+      return { success: true };
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteFromCart(id, email) {
+    try {
+      let connection = await db.connect();
+      let [data] = await connection.execute(
+        "DELETE FROM cart WHERE food_id = ? AND user = ?",
+        [id, email]
       );
       return { success: true };
     } catch (error) {
@@ -78,7 +80,7 @@ module.exports = class Foods {
   async getAllFoods() {
     try {
       let connection = await db.connect();
-      let [data] = await connection.execute("SELECT * FROM foods_in_cart");
+      let [data] = await connection.execute("SELECT * FROM foods");
       return data;
     } catch (error) {
       console.log(error);
@@ -102,7 +104,7 @@ module.exports = class Foods {
     try {
       let connection = await db.connect();
       let [data] = await connection.execute(
-        "SELECT * FROM foods_in_cart WHERE category = ?",
+        "SELECT * FROM foods WHERE category = ?",
         [cat]
       );
       return data;

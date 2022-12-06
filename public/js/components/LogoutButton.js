@@ -1,5 +1,13 @@
 export function LogoutButton() {
-  return $(`
-        <a href="/logout" class="nav-link">Logout</a>
+  let button = $(`
+        <a class="nav-link">Logout</a>
     `);
+  button.on("click", () => {
+    $.post("/logout", null, null, "json").done((res) => {
+      if (res.success) {
+        location.reload();
+      }
+    });
+  });
+  return button;
 }

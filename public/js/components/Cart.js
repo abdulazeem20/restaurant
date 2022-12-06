@@ -32,6 +32,7 @@ export function cart() {
     .done((res) => {
       let cost = 0;
       $(res).each((i, el) => {
+        if (res[0].success == true) return;
         el.cart = "cart";
         cart.find(".body").append(foodCard(el));
         cost += Number(el.cost) * Number(el.number);

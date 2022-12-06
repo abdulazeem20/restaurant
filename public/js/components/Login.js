@@ -56,8 +56,7 @@ export function login() {
           let response = errorAlert(res.error);
           response.insertBefore($(this));
         } else if (res.success) {
-          $("header").find("#signupToggler").replaceWith(LogoutButton);
-          $(".modal#signUp").modal("hide");
+          location.reload();
         }
       })
       .fail((res) => {

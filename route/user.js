@@ -31,7 +31,9 @@ router.post("/allfoods", async (req, res) => {
 });
 
 router.post("/update_quantity/:id/:num", async (req, res) => {
-  res.json(await food.updateQuantity(req.params.id, req.params.num));
+  res.json(
+    await food.updateQuantity(req.params.id, req.params.num, req.session.email)
+  );
 });
 
 router.post("/foods/:cat", async (req, res) => {
@@ -39,13 +41,13 @@ router.post("/foods/:cat", async (req, res) => {
 });
 
 router.post("/add_to_cart/:id", userSession, async (req, res) => {
-  res.json(await food.addToCart(req.params.id));
+  res.json(await food.addToCart(req.params.id, req.session.email));
 });
 
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) throw err;
-    res.redirect("/");
+    res.json({ success: true });
   });
 });
 
@@ -54,7 +56,7 @@ router.post("/session", (req, res) => {
 });
 
 router.post("/delete_from_cart/:id", userSession, async (req, res) => {
-  res.json(await food.deleteFromCart(req.params.id));
+  res.json(await food.deleteFromCart(req.params.id, req.session.email));
 });
 
 router.post("/food_detail/:id", async (req, res) => {
@@ -62,11 +64,15 @@ router.post("/food_detail/:id", async (req, res) => {
 });
 
 router.post("/in_cart", async (req, res) => {
-  res.json(await food.getFoodsInCart());
+  req.session.email
+    ? res.json(await food.getFoodsInCart(req.session.email))
+    : res.json([{ success: true }]);
 });
 
 router.post("/number_in_cart", async (req, res) => {
-  res.json(await food.getTotalNumberOfFoodsIncart());
+  req.session.email
+    ? res.json(await food.getTotalNumberOfFoodsIncart(req.session.email))
+    : res.json([{ total: 0 }]);
 });
 
 router.post("/register", userRegistrationValidation(), async (req, res) => {

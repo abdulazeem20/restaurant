@@ -31,7 +31,6 @@ module.exports = class Foods {
     try {
       let connection = await db.connect();
       let [data] = await connection.execute("CALL getUsersCart(?)", [email]);
-      console.log(data);
       return data[0].length > 0 ? data[0] : [{ success: true }];
     } catch (error) {
       console.log(error);

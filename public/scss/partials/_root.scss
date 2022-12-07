@@ -1,3 +1,5 @@
+@import './responsive';
+
 ::-webkit-scrollbar {
     width: .3rem;
 }
@@ -153,5 +155,79 @@ button,
                 opacity  : 0;
             }
         }
+    }
+}
+
+#checkout-modal {
+    .modal-body {
+        .methods {
+            display       : flex;
+            width         : 100%;
+            gap           : 1rem;
+            flex-direction: column;
+
+            @include responsiveMedia(l) {
+                flex-direction: row;
+            }
+
+            .method {
+                input {
+                    cursor : pointer;
+                    outline: none;
+                }
+
+                label {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        #action {
+            padding-top    : .5rem;
+            display        : flex;
+            justify-content: flex-end;
+
+            #bankAction {
+                width: 100%;
+
+                h6 {
+                    color    : $secondaryColor;
+                    font-size: large;
+
+                    span {
+                        font-weight: bold;
+                        color      : black;
+                    }
+                }
+
+                p {
+                    color     : $error;
+                    margin-top: 1rem;
+                }
+
+                #confirmBankPayment {
+                    display       : flex;
+                    gap           : 1rem;
+                    flex-direction: column;
+
+                    label {
+                        padding: .5rem;
+                        width  : 100%;
+                    }
+                }
+            }
+
+            >.paystack {
+                color : $secondaryColor;
+                cursor: pointer;
+                @extend %transition;
+                margin: 0;
+
+                &:hover {
+                    color: darken($color: $secondaryColor, $amount: 10%);
+                }
+            }
+        }
+
     }
 }

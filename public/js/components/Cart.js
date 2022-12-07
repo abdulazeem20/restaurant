@@ -1,4 +1,5 @@
 import { foodCard } from "./FoodCard.js";
+import { Checkout } from "./Checkout.js";
 export function cart() {
   let cart = $(`
           <div class="cart-overlay overlay">
@@ -48,15 +49,17 @@ export function cart() {
 export function setAmount(amount) {
   let button = $(`
     <button id="checkout_button" type="button" class="btn" 
-    data-amount=${amount} ${amount == 0 && "disabled"}>  
+    data-amount=${amount} ${amount == 0 && "disabled"} >  
       <i class="fas fa-shopping-cart"></i> ₦ ${new Intl.NumberFormat().format(
         amount
       )}
     </button>
   `);
   button.on("click", function () {
-    let total_cost = $(this).data("amount");
-    console.log(total_cost);
+    let totalCost = $(this).data("amount");
+    $("#checkout-modal").remove();
+    $("body").prepend(Checkout({ totalCost }));
+    $("#checkout-modal").modal("show");
   });
   $("#cart").find(".total").empty().html(button);
 }
